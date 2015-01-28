@@ -1,0 +1,19 @@
+{
+    "version": "0.1",
+    "name": "Injury-Surveillance",
+    "description": "An app for injury-surveillance",
+    "launch_path": "index.html",
+    "installs_allowed_from":["*"],
+    "icons": {
+    "16": "/img/icons/mortar-16.png"
+    },
+    "developer": {
+    "name": "Joakim, Henning",
+    },
+    "default_locale": "en",
+    "activities": {
+        "dhis": {
+        "href": "dhis.pgim.cmb.ac.lk:7080/iss/"
+        }
+    }
+}
