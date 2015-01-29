@@ -10,5 +10,4 @@ angular.module('app.dashboard', ['ngRoute'])
     }])
 
     .controller('DashboardCtrl', [function() {
-        console.log("Hello?");
     }]);
