@@ -12,9 +12,18 @@ module.exports = function(grunt) {
                     '!**/app/bower_components/**'
                 ]
             }
+        },
+
+        karma : {
+            unit : {
+                configFile : 'karma.conf.js',
+                singleRun : true
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.registerTask('default', ['jshint']);
+    grunt.loadNpmTasks('grunt-karma');
+
+    grunt.registerTask('test', ['jshint', 'karma']);
 };
