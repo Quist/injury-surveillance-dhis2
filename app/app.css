@@ -8,3 +8,12 @@
 .content-container {
   padding-top: 50px;
 }
+
+.group-container {
+  padding-top: 50px;
+  padding-bottom: 5px;
+
+  border-color: #DDD;
+  border-width: 1px 0px;
+  border-style: solid;
+}
