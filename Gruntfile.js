@@ -8,8 +8,10 @@ module.exports = function(grunt) {
             },
             application: {
                 src: [
-                    'app/**/*.js',
-                    '!**/app/bower_components/**'
+                    'app/components/**/*.js',
+                    'app/dashboard/**/*.js',
+                    'app/form/**/*.js',
+                    'app/apps.js'
                 ]
             }
         },
@@ -26,4 +28,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-karma');
 
     grunt.registerTask('test', ['jshint', 'karma']);
+    grunt.registerTask('lint', ['jshint']);
 };
