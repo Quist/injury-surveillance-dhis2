@@ -9,6 +9,5 @@ angular.module('app.form', ['ngRoute'])
       });
     }])
 
-    .controller('FormCtrl', [function() {
-
+    .controller('FormCtrl', ['apiService', '$log', function($apiService, $log) {
     }]);
