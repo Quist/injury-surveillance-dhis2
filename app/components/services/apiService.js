@@ -18,5 +18,5 @@ webServices.factory('apiService', function ($resource, $rootScope, $q, $http) {
                 query: {isArray: false}
             });
         }
-    }
+    };
 });
