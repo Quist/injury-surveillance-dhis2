@@ -1,5 +1,28 @@
-<p>This is the partial for view 2.</p>
-<p>
-  Showing of 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }}
-</p>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+
+    <ul ng-repeat="group in groups" class="nav navbar-nav">
+      <li><a href="#">{{group.sectionTitle}}</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div ng-repeat="group in groups" class="group-container">
+  <form>
+    <h2>{{group.sectionTitle}}</h2>
+    <div class="form-group">
+      <label for="example">
+        Example input
+      </label>
+      <input type ="email" class="form-control" id="example">
+    </div>
+    <div class="form-group">
+      <label for="example1">
+        Lorum ipsum
+      </label>
+      <input type ="email" class="form-control" id="example1">
+    </div>
+  </form>
+</div>
+
+<button style="margin-top: 20px;" class="btn btn-lg btn-success">Submit</button>

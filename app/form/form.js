@@ -9,5 +9,16 @@ angular.module('app.form', ['ngRoute'])
       });
     }])
 
-    .controller('FormCtrl', ['apiService', '$log', function($apiService, $log) {
+    .controller('FormCtrl', ['$scope', function($scope) {
+        $scope.groups = [
+            {
+                sectionTitle: "Basic info"
+            },
+            {
+                sectionTitle: "Transportation"
+            },
+            {
+                sectionTitle : "Diagnosis"
+            }
+        ];
     }]);
