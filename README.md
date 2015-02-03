@@ -1,3 +1,9 @@
+## Running the server
+```
+npm start
+```
+Starts http-server which serves the app folder
+
 ## Running tests
 ```
 grunt test

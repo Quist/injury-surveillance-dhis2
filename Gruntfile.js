@@ -1,4 +1,12 @@
 module.exports = function(grunt) {
+
+    var srcFiles = [
+        'app/components/**/*.js',
+        'app/dashboard/**/*.js',
+        'app/form/**/*.js',
+        'app/app.js'
+    ];
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
@@ -7,10 +15,7 @@ module.exports = function(grunt) {
                 jshintrc : true
             },
             application: {
-                src: [
-                    'app/**/*.js',
-                    '!**/app/bower_components/**'
-                ]
+                src: srcFiles
             }
         },
 
@@ -19,11 +24,23 @@ module.exports = function(grunt) {
                 configFile : 'karma.conf.js',
                 singleRun : true
             }
+        },
+
+        watch: {
+            scripts: {
+                files: srcFiles,
+                tasks: ['test'],
+                options: {
+                    spawn: false
+                }
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
     grunt.registerTask('test', ['jshint', 'karma']);
+    grunt.registerTask('lint', ['jshint']);
 };
