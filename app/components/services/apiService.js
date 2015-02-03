@@ -1,15 +1,16 @@
 'use strict';
 
-var webServices = angular.module('webServices', ['ngResource']);
+var webServices = angular.module('app.webServices', ['ngResource']);
 
-webServices.factory('apiService', function ($resource, $rootScope, $q, $http) {
+webServices.factory('apiService', function ($resource, $rootScope, $q, $http, $log) {
 
-    var xhReq = new XMLHttpRequest();
-    xhReq.open("GET", "manifest.webapp", false);
-    xhReq.send(null);
-
-    var serverResponse = JSON.parse(xhReq.responseText);
-    $rootScope.dhisAPI = serverResponse.activities.dhis.href;
+    $http.get('manifest.webapp').
+        success(function (data) {
+            $rootScope.dhisApi = data.activities.dhis.href;
+            $log.debug("Got dhisApi: " + $rootScope.dhisApi);
+        }).error(function(data, status) {
+           $log.error("Couldn't get dhisApi: " + status);
+        });
 
     return {
 

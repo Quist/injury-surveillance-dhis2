@@ -2,7 +2,7 @@
 
 angular.module('app', [
     'ngRoute',
-    'webServices',
+    'app.webServices',
     'app.dashboard',
     'app.form',
     'app.version'
