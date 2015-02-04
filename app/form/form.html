@@ -10,17 +10,41 @@
 <div ng-repeat="group in groups" class="group-container">
   <form>
     <h2>{{group.sectionTitle}}</h2>
-    <div class="form-group">
-      <label for="example">
-        Example input
+    <div ng-repeat="dataelement in group.dataElements" class="form-group">
+      <label>
+        {{dataelement.shortName}}
       </label>
-      <input type ="email" class="form-control" id="example">
-    </div>
-    <div class="form-group">
-      <label for="example1">
-        Lorum ipsum
-      </label>
-      <input type ="email" class="form-control" id="example1">
+
+      <!-- Text type -->
+      <input ng-if="dataelement.valueType == 'Free-Text'" type ="text" class="form-control">
+
+      <!-- Number type -->
+      <input ng-if="dataelement.valueType == 'Number'" type ="number" class="form-control">
+
+      <!-- Radio type -->
+      <div ng-if="dataelement.valueType == 'Radio'" class="radio" ng-repeat="option in dataelement.values">
+        <label> 
+          <input type="radio" name="optionsRadios" checked>
+          {{option}}
+        </label>
+      </div>
+
+      <!-- Checkbox type -->
+      <div ng-if="datelement.valueType == 'Checkbox'">
+
+      </div>
+
+      <!-- Date type -->
+      <div ng-if="dataelement.valueType == 'Date'">
+        <input  type ="datetime-local" class="form-control">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox"> Unknown
+          </label>
+        </div>
+      </div>
+
+
     </div>
   </form>
 </div>

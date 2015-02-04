@@ -12,10 +12,40 @@ angular.module('app.form', ['ngRoute'])
     .controller('FormCtrl', ['$scope', function($scope) {
         $scope.groups = [
             {
-                sectionTitle: "Basic info"
+                sectionTitle: "Basic info",
+                dataElements : [
+                    {
+                        shortName : "Age",
+                        valueType : "Number"
+                    },
+                    {
+                        shortName : "Occupation",
+                        valueType : "Multi-Text"
+                    },
+                    {
+                        shortName : "Sex",
+                        valueType : "Radio",
+                        values : [
+                            "Male", "Female", "Other"
+                        ]
+                    }, {
+                        shortName : "Date of injury",
+                        valueType : "Date"
+                    },
+                    {
+                        shortName: "Time of admission",
+                        valueType: "Date"
+                    }
+                ]
             },
             {
-                sectionTitle: "Transportation"
+                sectionTitle: "Transportation",
+                dataElements : [
+                    {
+                        shortName : "From the site of injury",
+                        valueType : "Text"
+                    }
+                ]
             },
             {
                 sectionTitle : "Diagnosis"
