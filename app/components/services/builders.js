@@ -9,7 +9,7 @@ builders.factory('dataSetBuilder', function (apiService, $log, $q) {
     function extractDataElements(elements) {
         angular.forEach(elements, function(element) {
             dataElements.push(element.data);
-        })
+        });
     }
 
     function buildDataset() {
@@ -63,5 +63,5 @@ builders.factory('dataSetBuilder', function (apiService, $log, $q) {
 
             return {dataset: dataset, dataElememnts: dataElements};
         }
-    }
+    };
 });
