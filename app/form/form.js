@@ -3,11 +3,20 @@
 angular.module('app.form', ['ngRoute'])
 
     .config(['$routeProvider', function($routeProvider) {
-      $routeProvider.when('/form', {
-        templateUrl: 'form/form.html',
-        controller: 'FormCtrl'
-      });
+        $routeProvider.when('/form/:progId/:stageId', {
+            templateUrl: 'form/form.html',
+            controller: 'FormCtrl'
+        });
     }])
 
-    .controller('FormCtrl', ['apiService', '$log', function($apiService, $log) {
-    }]);
+    .controller('FormCtrl', ['dataSetBuilder', 'apiService', '$log', '$routeParams', '$scope',
+        function(dataSetBuilder, apiService, $log, $routeParams, $scope) {
+            var dataset;
+            var dataElements;
+
+            $scope.test = function() {
+                var data = dataSetBuilder.buildDataSet($routeParams.stageId);
+                dataset  = data.dataset;
+                dataElements = data.dataElements;
+            };
+        }]);

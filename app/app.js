@@ -3,6 +3,7 @@
 angular.module('app', [
     'ngRoute',
     'app.webServices',
+    'app.builders',
     'app.dashboard',
     'app.form',
     'app.version'

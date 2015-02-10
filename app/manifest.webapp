@@ -13,7 +13,9 @@
     "default_locale": "en",
     "activities": {
         "dhis": {
-        "href": "dhis.pgim.cmb.ac.lk:7080/iss/"
-        }
+          "href": "dhis.pgim.cmb.ac.lk:7080/iss/api/",
+          "testHref": "http://inf5750-20.uio.no/api/"
+        },
+      "development": true
     }
 }
