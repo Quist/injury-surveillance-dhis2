@@ -10,7 +10,7 @@ angular.module('app.form', ['ngRoute'])
     }])
 
     .controller('FormCtrl', ['$scope', function($scope) {
-        $scope.groups = [
+        var fakeData = [
             {
                 sectionTitle: "Basic info",
                 dataElements : [
@@ -51,4 +51,6 @@ angular.module('app.form', ['ngRoute'])
                 sectionTitle : "Diagnosis"
             }
         ];
+
+        $scope.groups = fakeData;
     }]);
