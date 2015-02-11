@@ -14,7 +14,6 @@ builders.factory('dataSetBuilder', function (apiService, $log, $q) {
 
     function buildDataset() {
         angular.forEach(dataElements, function(element) {
-            //TODO search for right section
             var sectionTitle = element.dataElementGroups[0].name;
             var section = findSection(sectionTitle);
             if(section.exist) {
