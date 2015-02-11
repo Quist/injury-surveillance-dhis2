@@ -3,13 +3,14 @@
 angular.module('app.form', ['ngRoute'])
 
     .config(['$routeProvider', function($routeProvider) {
-      $routeProvider.when('/form', {
-        templateUrl: 'form/form.html',
-        controller: 'FormCtrl'
-      });
+        $routeProvider.when('/form/:progId/:stageId', {
+            templateUrl: 'form/form.html',
+            controller: 'FormCtrl'
+        });
     }])
 
-    .controller('FormCtrl', ['$scope', function($scope) {
+    .controller('FormCtrl', ['$routeParams', '$scope', 'dataSetBuilder', 'apiService',
+        function($routeParams, $scope, dataSetBuilder, apiService) {
         $scope.groups = [
             {
                 sectionTitle: "Basic info",
@@ -52,3 +53,5 @@ angular.module('app.form', ['ngRoute'])
             }
         ];
     }]);
+
+
