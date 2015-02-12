@@ -28,6 +28,12 @@ webServices.factory('apiService', function ($resource, $rootScope, $q, $http, $l
 
         getDataElement: function(id) {
             return $http({method: 'GET', url: $rootScope.dhisApi + 'dataElements/' + id + '.json', cache: true});
+        },
+
+        getOptionSet: function(id) {
+            return $resource($rootScope.dhisApi + 'optionSets/' + id + '.json', {}, {
+                query: {isArray: false}
+            });
         }
     };
 });

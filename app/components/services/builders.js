@@ -6,23 +6,28 @@ builders.factory('dataSetBuilder', function (apiService, $log, $q) {
     var dataset = [{}];
     var dataElements = [];
 
-    function extractDataElements(elements) {
-        angular.forEach(elements, function(element) {
-            dataElements.push(element.data);
-        });
-    }
+    function buildDataset(elementResponses) {
+        angular.forEach(elementResponses, function(response) {
+            var element = response.data;
+            var sectionTitle = element.dataElementGroups[1].name;
+            var newElement = {shortName: element.shortName, valueType: element.type, values: []};
 
-    function buildDataset() {
-        angular.forEach(dataElements, function(element) {
-            var sectionTitle = element.dataElementGroups[0].name;
+            if('optionSet' in element) {
+                apiService.getOptionSet(element.optionSet.id).get(function (optionSet) {
+                    newElement.values = optionSet.options;
+                });
+            }
+
             var section = findSection(sectionTitle);
             if(section.exist) {
                 $log.debug("Adding to existing section: " + sectionTitle);
-                section.data.dataElements.push({shortName: element.shortName, valueType: element.type});
+                section.data.dataElements.push(newElement);
             } else {
                 $log.debug("Creating new section: " + sectionTitle);
-                dataset.push({sectionTitle: sectionTitle, dataElements: [{shortName: element.shortName, valueType: element.type}]});
+                dataset.push({sectionTitle: sectionTitle,dataElements: [newElement]});
             }
+
+            dataElements.push(element);
         });
     }
 
@@ -49,14 +54,12 @@ builders.factory('dataSetBuilder', function (apiService, $log, $q) {
             });
 
             stageDeffered.promise.then(function (elementList) {
-                $log.debug("Getting dataElements");
-                for(var i = 0; i < elementList.length; i++) {
-                    var elementId = elementList[i].dataElement.id;
-                    dataElementsPromises.push(apiService.getDataElement(elementId));
-                }
-                $q.all(dataElementsPromises).then(function (elements) {
-                    extractDataElements(elements);
-                    buildDataset();
+                angular.forEach(elementList, function (element) {
+                    dataElementsPromises.push(apiService.getDataElement(element.dataElement.id));
+                });
+
+                $q.all(dataElementsPromises).then(function (elementResponses) {
+                    buildDataset(elementResponses);
                 });
             });
 
