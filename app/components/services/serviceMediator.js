@@ -8,6 +8,15 @@ serviceMediator.factory('serviceMediator', function (dataSetBuilder, apiService)
 
         getDataSet: function(programStageId) {
             return dataSetBuilder.buildDataSet(programStageId);
+        },
+
+        getPrograms: function() {
+            return apiService.getPrograms();
+        },
+
+        getProgram: function(id) {
+            return apiService.getProgram(id);
         }
+
     };
 });

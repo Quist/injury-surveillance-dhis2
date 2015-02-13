@@ -20,6 +20,12 @@ webServices.factory('apiService', function ($resource, $rootScope, $q, $http, $l
             });
         },
 
+        getProgram: function (id) {
+            return $resource($rootScope.dhisApi + 'programs/' + id + '.json', {}, {
+                query: {isArray: false}
+            });
+        },
+
         getProgramStage: function(id) {
             return $resource($rootScope.dhisApi + 'programStages/' + id + '.json', {}, {
                 query: {isArray: false}
