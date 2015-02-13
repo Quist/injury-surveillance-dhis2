@@ -2,15 +2,7 @@
 
 var webServices = angular.module('app.webServices', []);
 
-webServices.factory('apiService', function ($rootScope, $q, $http, $log) {
-
-    $http.get('manifest.webapp').
-        success(function (data) {
-            $rootScope.dhisApi = data.activities.dhis.testHref;
-            $log.debug("Got dhisApi: " + $rootScope.dhisApi);
-        }).error(function(data, status) {
-            $log.error("Couldn't get dhisApi: " + status);
-        });
+webServices.factory('apiService', function ($rootScope, $q, $http) {
 
     return {
 
