@@ -1,6 +1,6 @@
 'use strict';
 
-describe('app.dashboard module', function() {
+describe('dashboard module', function() {
     var ctrl;
     var scope;
 
@@ -9,24 +9,23 @@ describe('app.dashboard module', function() {
     beforeEach(module('app.builders'));
     beforeEach(module('app.webServices'));
 
-    describe('dashboard', function() {
 
-        beforeEach(inject(function($controller, $rootScope){
-            scope = $rootScope.$new();
-            ctrl = $controller('DashboardCtrl', {$scope : scope});
-        }));
 
-        it('controller should be defined', inject(function() {
-            expect(ctrl).toBeDefined();
-        }));
+    beforeEach(inject(function($controller, $rootScope){
+        scope = $rootScope.$new();
+        ctrl = $controller('DashboardCtrl', {$scope : scope});
+    }));
 
-        it('should define programs on the scope', inject(function(){
-            expect(scope.programs).toBeDefined();
-        }));
+    it('controller should be defined', inject(function() {
+        expect(ctrl).toBeDefined();
+    }));
 
-      it('should have a onselected program function', inject(function(){
-          expect(scope.onSelectedProgram).toBeDefined();
-      }));
+    it('should define programs on the scope', inject(function(){
+        expect(scope.programs).toBeDefined();
+    }));
 
-  });
+    it('should have a onselected program function', inject(function(){
+        expect(scope.onSelectedProgram).toBeDefined();
+    }));
+
 });
