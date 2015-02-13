@@ -9,14 +9,14 @@ builders.factory('dataSetBuilder', function (apiService, $log, $q) {
     function buildDataset(elementResponses) {
         angular.forEach(elementResponses, function(response) {
             var element = response.data;
-            
+
             //TODO selecting group[1] for testing purposes on 5750-server.
             var sectionTitle = element.dataElementGroups[1].name;
             var newElement = {shortName: element.shortName, valueType: element.type, values: []};
 
             if('optionSet' in element) {
-                apiService.getOptionSet(element.optionSet.id).get(function (optionSet) {
-                    newElement.values = optionSet.options;
+                apiService.getOptionSet(element.optionSet.id).then(function(result) {
+                    newElement.values = result.data.options;
                 });
             }
 
@@ -50,18 +50,10 @@ builders.factory('dataSetBuilder', function (apiService, $log, $q) {
             dataElements = [];
 
             var returnDeffered = $q.defer();
-            var stageDeffered = $q.defer();
             var dataElementsPromises = [];
 
-            apiService.getProgramStage(programStageId).get(function (programStage) {
-                stageDeffered.resolve(programStage.programStageDataElements);
-            }, function(reason) {
-                $log.error("Failed getting programStage: " + reason);
-                stageDeffered.reject(reason);
-                returnDeffered.reject(reason);
-            });
-
-            stageDeffered.promise.then(function (elementList) {
+            apiService.getProgramStage(programStageId).then(function (result) {
+                var elementList = result.data.programStageDataElements;
                 angular.forEach(elementList, function (element) {
                     dataElementsPromises.push(apiService.getDataElement(element.dataElement.id));
                 });

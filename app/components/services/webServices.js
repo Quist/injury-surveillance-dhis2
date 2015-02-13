@@ -1,8 +1,8 @@
 'use strict';
 
-var webServices = angular.module('app.webServices', ['ngResource']);
+var webServices = angular.module('app.webServices', []);
 
-webServices.factory('apiService', function ($resource, $rootScope, $q, $http, $log) {
+webServices.factory('apiService', function ($rootScope, $q, $http, $log) {
 
     $http.get('manifest.webapp').
         success(function (data) {
@@ -15,21 +15,15 @@ webServices.factory('apiService', function ($resource, $rootScope, $q, $http, $l
     return {
 
         getPrograms: function() {
-            return $resource($rootScope.dhisApi + 'programs.json', {} ,{
-                query: {isArray: false}
-            });
+            return $http({method: 'GET', url: $rootScope.dhisApi + 'programs.json'});
         },
 
         getProgram: function (id) {
-            return $resource($rootScope.dhisApi + 'programs/' + id + '.json', {}, {
-                query: {isArray: false}
-            });
+            return $http({method: 'GET', url: $rootScope.dhisApi + 'programs/' + id + '.json'});
         },
 
         getProgramStage: function(id) {
-            return $resource($rootScope.dhisApi + 'programStages/' + id + '.json', {}, {
-                query: {isArray: false}
-            });
+            return $http({method: 'GET', url: $rootScope.dhisApi + 'programStages/' + id + '.json'});
         },
 
         getDataElement: function(id) {
@@ -37,9 +31,7 @@ webServices.factory('apiService', function ($resource, $rootScope, $q, $http, $l
         },
 
         getOptionSet: function(id) {
-            return $resource($rootScope.dhisApi + 'optionSets/' + id + '.json', {}, {
-                query: {isArray: false}
-            });
+            return $http({method: 'GET', url: $rootScope.dhisApi + 'optionSets/' + id + '.json'});
         }
     };
 });
