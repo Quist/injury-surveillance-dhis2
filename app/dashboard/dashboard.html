@@ -1,3 +1,26 @@
 <h1 class="text-center">Dashboard</h1>
-<div class="content-container"></div>
-<a class="btn btn-default btn-block" href="#/form/yER7LmNjloJ/hrrDaWUJ8wk" role="button">Make data entry</a>
+<div class="content-container">
+    <div class="form-group">
+        <label>
+            Select program
+        </label>
+        <select  ng-model="selectedProgram"
+                 class="form-control"
+                 ng-options="program.name for program in programs.programs"
+                 ng-change="onSelectedProgram(selectedProgram)">
+        </select>
+    </div>
+
+    <div ng-show="selectedProgram" class="form-group">
+        <label>
+            Select stage
+        </label>
+        <select  ng-model="selectedStage"
+                 class="form-control"
+                 ng-options="stage.name for stage in stages.stages">
+        </select>
+    </div>
+
+    <a class="btn btn-default btn-block" href="#/form/123/hrrDaWUJ8wk" role="button">Make data entry</a>
+
+</div>
