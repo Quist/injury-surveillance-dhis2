@@ -2,6 +2,7 @@
 
 angular.module('app', [
     'ngRoute',
+    'app.serviceMediator',
     'app.webServices',
     'app.builders',
     'app.dashboard',

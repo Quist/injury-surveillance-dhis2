@@ -8,8 +8,8 @@ angular.module('app.form', ['ngRoute'])
             controller: 'FormCtrl'
         });
     }])
-    .controller('FormCtrl', ['$routeParams', '$scope', 'dataSetBuilder', 'apiService',
-        function($routeParams, $scope, dataSetBuilder, apiService) {
+    .controller('FormCtrl', ['$routeParams', '$scope', 'serviceMediator',
+        function($routeParams, $scope, serviceMediator) {
             var fakeData = [
                 {
                     sectionTitle: "Basic info",
