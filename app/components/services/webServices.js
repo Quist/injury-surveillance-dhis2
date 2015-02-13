@@ -27,7 +27,7 @@ webServices.factory('apiService', function ($resource, $rootScope, $q, $http, $l
         },
 
         getDataElement: function(id) {
-            return $http({method: 'GET', url: $rootScope.dhisApi + 'dataElements/' + id + '.json', cache: true});
+            return $http({method: 'GET', url: $rootScope.dhisApi + 'dataElements/' + id + '.json'});
         },
 
         getOptionSet: function(id) {

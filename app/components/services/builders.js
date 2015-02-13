@@ -9,6 +9,8 @@ builders.factory('dataSetBuilder', function (apiService, $log, $q) {
     function buildDataset(elementResponses) {
         angular.forEach(elementResponses, function(response) {
             var element = response.data;
+            
+            //TODO selecting group[1] for testing purposes on 5750-server.
             var sectionTitle = element.dataElementGroups[1].name;
             var newElement = {shortName: element.shortName, valueType: element.type, values: []};
 
@@ -29,6 +31,7 @@ builders.factory('dataSetBuilder', function (apiService, $log, $q) {
 
             dataElements.push(element);
         });
+        return {dataSet: dataset, dataElememnts: dataElements};
     }
 
     function findSection(sectionTitle) {
@@ -43,6 +46,10 @@ builders.factory('dataSetBuilder', function (apiService, $log, $q) {
     return {
 
         buildDataSet: function (programStageId) {
+            dataset = [{}];
+            dataElements = [];
+
+            var returnDeffered = $q.defer();
             var stageDeffered = $q.defer();
             var dataElementsPromises = [];
 
@@ -51,6 +58,7 @@ builders.factory('dataSetBuilder', function (apiService, $log, $q) {
             }, function(reason) {
                 $log.error("Failed getting programStage: " + reason);
                 stageDeffered.reject(reason);
+                returnDeffered.reject(reason);
             });
 
             stageDeffered.promise.then(function (elementList) {
@@ -59,11 +67,13 @@ builders.factory('dataSetBuilder', function (apiService, $log, $q) {
                 });
 
                 $q.all(dataElementsPromises).then(function (elementResponses) {
-                    buildDataset(elementResponses);
+                    returnDeffered.resolve(buildDataset(elementResponses));
+                }, function (reason) {
+                    returnDeffered.reject(reason);
                 });
             });
 
-            return {dataset: dataset, dataElememnts: dataElements};
+            return returnDeffered.promise;
         }
     };
 });
