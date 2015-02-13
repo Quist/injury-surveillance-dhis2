@@ -5,6 +5,9 @@ describe('app.dashboard module', function() {
     var scope;
 
     beforeEach(module('app.dashboard'));
+    beforeEach(module('app.serviceMediator'));
+    beforeEach(module('app.builders'));
+    beforeEach(module('app.webServices'));
 
     describe('dashboard', function() {
 

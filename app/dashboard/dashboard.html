@@ -17,10 +17,10 @@
         </label>
         <select  ng-model="selectedStage"
                  class="form-control"
-                 ng-options="stage.name for stage in stages.stages">
+                 ng-options="stage.name for stage in stages">
         </select>
     </div>
 
-    <a class="btn btn-default btn-block" href="#/form/123/hrrDaWUJ8wk" role="button">Make data entry</a>
+    <a class="btn btn-default btn-block" href="#/form/{{selectedProgram.id}}/{{selectedStage.id}}" role="button">Make data entry</a>
 
 </div>

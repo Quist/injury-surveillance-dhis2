@@ -9,22 +9,18 @@ angular.module('app.dashboard', ['ngRoute'])
         });
     }])
 
-    .controller('DashboardCtrl',  ['$scope', function($scope) {
-        $scope.programs = {
-            programs : [
-                {
-                    name : "QA-tool"
-                }
-            ]
-        };
+    .controller('DashboardCtrl',  ['$scope', 'serviceMediator', '$timeout', function($scope, serviceMediator, $timeout) {
+        $timeout(function(){
+             serviceMediator.getPrograms().then(function(res){
+                 $scope.programs = res.data;
+            }, function(err){
+            });
+        }, 200);
+
 
         $scope.onSelectedProgram = function(program) {
-            $scope.stages = {
-                stages : [
-                    {
-                        name : "lol"
-                    }
-                ]
-            };
+            serviceMediator.getProgram(program.id).success(function(res){
+                $scope.stages = res.programStages;
+            });
         };
     }]);

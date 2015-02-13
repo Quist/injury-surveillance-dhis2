@@ -51,5 +51,8 @@ angular.module('app.form', ['ngRoute'])
                     sectionTitle : "Diagnosis"
                 }
             ];
-            $scope.groups = fakeData;
+            serviceMediator.getDataSet($routeParams.stageId).then(function(res){
+                $scope.groups = res.dataSet;
+                console.log($scope.groups);
+            })
         }]);
