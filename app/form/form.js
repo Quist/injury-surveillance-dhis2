@@ -10,6 +10,16 @@ angular.module('app.form', ['ngRoute'])
     }])
     .controller('FormCtrl', ['$routeParams', '$scope', 'serviceMediator',
         function($routeParams, $scope, serviceMediator) {
+
+            serviceMediator.CheckForApi().then(function () {
+                //Fill this section with the initialization needed for the controller.
+                serviceMediator.getDataSet($routeParams.stageId).then(function(res){
+                    $scope.groups = res.dataSet;
+                });
+            }, function() {
+                //Check again
+            });
+
             var fakeData = [
                 {
                     sectionTitle: "Basic info",
@@ -51,8 +61,4 @@ angular.module('app.form', ['ngRoute'])
                     sectionTitle : "Diagnosis"
                 }
             ];
-            serviceMediator.getDataSet($routeParams.stageId).then(function(res){
-                $scope.groups = res.dataSet;
-                console.log($scope.groups);
-            })
         }]);

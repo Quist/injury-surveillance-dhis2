@@ -9,14 +9,18 @@ angular.module('app.dashboard', ['ngRoute'])
         });
     }])
 
-    .controller('DashboardCtrl',  ['$scope', 'serviceMediator', '$timeout', function($scope, serviceMediator, $timeout) {
-        $timeout(function(){
-             serviceMediator.getPrograms().then(function(res){
-                 $scope.programs = res.data;
+    .controller('DashboardCtrl',  ['$q','$scope', 'serviceMediator', function($q, $scope, serviceMediator) {
+
+        serviceMediator.CheckForApi().then(function() {
+            //Fill this section with the initialization needed for the controller.
+            serviceMediator.getPrograms().then(function(res){
+                $scope.programs = res.data;
             }, function(err){
             });
-        }, 200);
 
+        }, function () {
+            //Check again
+        });
 
         $scope.onSelectedProgram = function(program) {
             serviceMediator.getProgram(program.id).success(function(res){
