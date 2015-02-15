@@ -8,17 +8,20 @@ angular.module('app.form', ['ngRoute'])
             controller: 'FormCtrl'
         });
     }])
-    .controller('FormCtrl', ['$routeParams', '$scope', 'serviceMediator',
-        function($routeParams, $scope, serviceMediator) {
+    .controller('FormCtrl', ['$routeParams', '$scope','$interval', 'serviceMediator',
+        function($routeParams, $scope, $interval, serviceMediator) {
 
-            serviceMediator.CheckForApi().then(function () {
-                //Fill this section with the initialization needed for the controller.
-                serviceMediator.getDataSet($routeParams.stageId).then(function(res){
-                    $scope.groups = res.dataSet;
+            initCtrl();
+            var initPromise = $interval(initCtrl, 2000);
+            function initCtrl() {
+                serviceMediator.CheckForApi().then(function () {
+                    //Fill this section with the initialization needed for the controller.
+                    $interval.cancel(initPromise);
+                    serviceMediator.getDataSet($routeParams.stageId).then(function (res) {
+                        $scope.groups = res.dataSet;
+                    });
                 });
-            }, function() {
-                //Check again
-            });
+            }
 
             var fakeData = [
                 {

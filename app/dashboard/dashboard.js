@@ -9,22 +9,24 @@ angular.module('app.dashboard', ['ngRoute'])
         });
     }])
 
-    .controller('DashboardCtrl',  ['$q','$scope', 'serviceMediator', function($q, $scope, serviceMediator) {
+    .controller('DashboardCtrl',  ['$q','$scope', '$interval', 'serviceMediator',
+        function($q, $scope, $interval, serviceMediator) {
 
-        serviceMediator.CheckForApi().then(function() {
-            //Fill this section with the initialization needed for the controller.
-            serviceMediator.getPrograms().then(function(res){
-                $scope.programs = res.data;
-            }, function(err){
-            });
+            initCtrl();
+            var initPromise = $interval(initCtrl, 2000);
+            function initCtrl() {
+                serviceMediator.CheckForApi().then(function () {
+                    //Fill this section with the initialization needed for the controller.
+                    $interval.cancel(initPromise);
+                    serviceMediator.getPrograms().then(function (res) {
+                        $scope.programs = res.data;
+                    });
+                });
+            }
 
-        }, function () {
-            //Check again
-        });
-
-        $scope.onSelectedProgram = function(program) {
-            serviceMediator.getProgram(program.id).success(function(res){
-                $scope.stages = res.programStages;
-            });
-        };
-    }]);
+            $scope.onSelectedProgram = function(program) {
+                serviceMediator.getProgram(program.id).success(function(res){
+                    $scope.stages = res.programStages;
+                });
+            };
+        }]);
