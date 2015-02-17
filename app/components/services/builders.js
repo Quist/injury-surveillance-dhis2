@@ -9,9 +9,15 @@ builders.factory('dataSetBuilder', function (apiService, $log, $q) {
     function buildDataset(elementResponses) {
         angular.forEach(elementResponses, function(response) {
             var element = response.data;
+            var sectionTitle;
 
             //TODO selecting group[1] for testing purposes on 5750-server.
-            var sectionTitle = element.dataElementGroups[1].name;
+            if(element.dataElementGroups.length == 0) {
+                sectionTitle = "Not grouped";
+            } else {
+                sectionTitle = element.dataElementGroups[0].name;
+            }
+
             var newElement = {shortName: element.shortName, valueType: element.type, values: []};
 
             if('optionSet' in element) {

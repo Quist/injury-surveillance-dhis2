@@ -5,24 +5,18 @@ angular.module('app.dashboard', ['ngRoute'])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/dashboard', {
             templateUrl: 'dashboard/dashboard.html',
-            controller: 'DashboardCtrl'
+            controller: 'DashboardCtrl',
+            resolve :  {
+                programs: function (serviceMediator) {
+                    return serviceMediator.getPrograms();
+                }
+            }
         });
     }])
 
-    .controller('DashboardCtrl',  ['$q','$scope', '$interval', 'serviceMediator',
-        function($q, $scope, $interval, serviceMediator) {
-
-            initCtrl();
-            var initPromise = $interval(initCtrl, 2000);
-            function initCtrl() {
-                serviceMediator.CheckForApi().then(function () {
-                    //Fill this section with the initialization needed for the controller.
-                    $interval.cancel(initPromise);
-                    serviceMediator.getPrograms().then(function (res) {
-                        $scope.programs = res.data;
-                    });
-                });
-            }
+    .controller('DashboardCtrl',  ['$q','$scope', '$interval', 'serviceMediator', 'programs',
+        function($q, $scope, $interval, serviceMediator, programs) {
+            $scope.programs = programs.data;
 
             $scope.onSelectedProgram = function(program) {
                 serviceMediator.getProgram(program.id).success(function(res){

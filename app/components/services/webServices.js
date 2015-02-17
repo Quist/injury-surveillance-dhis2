@@ -9,7 +9,7 @@ webServices.factory('apiService', function ($rootScope, $q, $http, $log) {
         readApiUrl: function () {
             var deffered = $q.defer();
             $http.get('manifest.webapp').success(function (data) {
-                $rootScope.dhisApi = data.activities.dhis.testHref;
+                $rootScope.dhisApi = data.activities.dhis.href;
                 deffered.resolve(data);
                 $log.debug("Got dhisApi: " + $rootScope.dhisApi);
             }).error(function(data, status) {

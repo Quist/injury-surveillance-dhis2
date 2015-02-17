@@ -2,23 +2,31 @@
 
 var serviceMediator = angular.module('app.serviceMediator', ['ngResource']);
 
-serviceMediator.factory('serviceMediator', function (dataSetBuilder, apiService, $rootScope, $q) {
+serviceMediator.factory('serviceMediator', function (dataSetBuilder, apiService, $rootScope, $q, $timeout) {
+
+    function checkForApi() {
+        if('dhisApi' in $rootScope) {
+            return $q.when([]);
+        }
+        return apiService.readApiUrl();
+    }
 
     return {
 
-        CheckForApi: function() {
-            if('dhisApi' in $rootScope) {
-                return $q.when([]);
-            }
-            return apiService.readApiUrl();
-        },
-
         getDataSet: function(programStageId) {
-            return dataSetBuilder.buildDataSet(programStageId);
+            return checkForApi().then(function () {
+                return dataSetBuilder.buildDataSet(programStageId);
+            }, function (data) {
+                return $q.reject(data);
+            })
         },
 
         getPrograms: function() {
-            return apiService.getPrograms();
+           return checkForApi().then(function () {
+                return apiService.getPrograms();
+            }, function (data) {
+                return $q.reject(data);
+            })
         },
 
         getProgram: function(id) {

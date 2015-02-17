@@ -5,23 +5,17 @@ angular.module('app.form', ['ngRoute'])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/form/:progId/:stageId', {
             templateUrl: 'form/form.html',
-            controller: 'FormCtrl'
+            controller: 'FormCtrl',
+            resolve: {
+                dataSet: function (serviceMediator, $route) {
+                    return serviceMediator.getDataSet($route.current.params.stageId);
+                }
+            }
         });
     }])
-    .controller('FormCtrl', ['$routeParams', '$scope','$interval', 'serviceMediator',
-        function($routeParams, $scope, $interval, serviceMediator) {
-
-            initCtrl();
-            var initPromise = $interval(initCtrl, 2000);
-            function initCtrl() {
-                serviceMediator.CheckForApi().then(function () {
-                    //Fill this section with the initialization needed for the controller.
-                    $interval.cancel(initPromise);
-                    serviceMediator.getDataSet($routeParams.stageId).then(function (res) {
-                        $scope.groups = res.dataSet;
-                    });
-                });
-            }
+    .controller('FormCtrl', ['$routeParams', '$scope','$interval', 'serviceMediator', 'dataSet',
+        function($routeParams, $scope, $interval, serviceMediator, dataSet) {
+            $scope.groups = dataSet.dataSet;
 
             var fakeData = [
                 {
