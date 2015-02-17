@@ -11,6 +11,9 @@ describe("Builders", function () {
 
     beforeEach(module('app.builders'));
     beforeEach(module('app.webServices'));
+    beforeEach(module(function ($provide) {
+        $provide.value('usSpinnerService', {});
+    }));
 
     describe("dataSetBuilder", function () {
         var $httpBackend, $rootScope;

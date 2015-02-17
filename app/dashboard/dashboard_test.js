@@ -6,16 +6,11 @@ describe('Dashboard module', function() {
     var programs;
 
     beforeEach(module('app.dashboard'));
-    beforeEach(module('app.serviceMediator'));
-    beforeEach(module('app.builders'));
-    beforeEach(module('app.webServices'));
-
-
 
     beforeEach(inject(function($controller, $rootScope){
         scope = $rootScope.$new();
         programs = {data : []};
-        ctrl = $controller('DashboardCtrl', {$scope : scope, programs : programs});
+        ctrl = $controller('DashboardCtrl', {$scope : scope, programs : programs, serviceMediator : {}});
 
     }));
 
