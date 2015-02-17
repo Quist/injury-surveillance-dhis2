@@ -13,8 +13,8 @@ angular.module('app.form', ['ngRoute'])
             }
         });
     }])
-    .controller('FormCtrl', ['$routeParams', '$scope','$interval', 'serviceMediator', 'dataSet',
-        function($routeParams, $scope, $interval, serviceMediator, dataSet) {
+    .controller('FormCtrl', ['$routeParams', '$scope','$interval', 'dataSet',
+        function($routeParams, $scope, $interval, dataSet) {
             $scope.groups = dataSet.dataSet;
 
             var fakeData = [

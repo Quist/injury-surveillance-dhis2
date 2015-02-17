@@ -1,8 +1,9 @@
 'use strict';
 
-describe('dashboard module', function() {
+describe('Dashboard module', function() {
     var ctrl;
     var scope;
+    var programs;
 
     beforeEach(module('app.dashboard'));
     beforeEach(module('app.serviceMediator'));
@@ -13,7 +14,9 @@ describe('dashboard module', function() {
 
     beforeEach(inject(function($controller, $rootScope){
         scope = $rootScope.$new();
-        ctrl = $controller('DashboardCtrl', {$scope : scope});
+        programs = {data : []};
+        ctrl = $controller('DashboardCtrl', {$scope : scope, programs : programs});
+
     }));
 
     it('controller should be defined', inject(function() {

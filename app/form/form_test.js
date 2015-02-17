@@ -1,7 +1,7 @@
 'use strict';
 
-describe('app.form module', function() {
-    var formCtrl, scope, serviceMediator, routeParams;
+describe('Form module', function() {
+    var formCtrl, scope, serviceMediator, routeParams, dataSet;
 
     beforeEach(module('app.form'));
     beforeEach(module('app.builders'));
@@ -13,8 +13,9 @@ describe('app.form module', function() {
             scope = $rootScope.$new();
             serviceMediator = _serviceMediator_;
             routeParams = {progId : 2545, stageId: 123};
+            dataSet = {dataSet : []};
             formCtrl = $controller('FormCtrl',
-                {$routeParams: routeParams, $scope : scope, serviceMediator: serviceMediator});
+                {$routeParams: routeParams, $scope : scope, serviceMediator: serviceMediator, dataSet : dataSet});
         }));
 
         it('should be defined', inject(function() {
