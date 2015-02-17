@@ -1,15 +1,17 @@
 'use strict';
 
-angular.module('app', [
+var app = angular.module('app', [
     'ngRoute',
     'app.serviceMediator',
     'app.webServices',
     'app.builders',
     'app.dashboard',
     'app.form',
-    'app.version'
-]).
+    'app.version',
+    'angularSpinner'
+]);
 
-    config(['$routeProvider', function($routeProvider) {
-        $routeProvider.otherwise({redirectTo: '/dashboard'});
-    }]);
+
+app.config(['$routeProvider', function($routeProvider) {
+    $routeProvider.otherwise({redirectTo: '/dashboard'});
+}]);

@@ -2,7 +2,7 @@
 
 var builders = angular.module('app.builders', ['ngResource']);
 
-builders.factory('dataSetBuilder', function (apiService, $log, $q) {
+builders.factory('dataSetBuilder', function (apiService, $log, $q, usSpinnerService) {
     var dataset = [{}];
     var dataElements = [];
 
@@ -52,6 +52,7 @@ builders.factory('dataSetBuilder', function (apiService, $log, $q) {
     return {
 
         buildDataSet: function (programStageId) {
+            usSpinnerService.spin('loading-spinner');
             dataset = [{}];
             dataElements = [];
 
@@ -65,6 +66,7 @@ builders.factory('dataSetBuilder', function (apiService, $log, $q) {
                 });
 
                 $q.all(dataElementsPromises).then(function (elementResponses) {
+                    usSpinnerService.stop('loading-spinner');
                     returnDeffered.resolve(buildDataset(elementResponses));
                 }, function (reason) {
                     returnDeffered.reject(reason);
