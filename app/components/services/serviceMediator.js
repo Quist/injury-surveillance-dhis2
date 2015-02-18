@@ -18,7 +18,7 @@ serviceMediator.factory('serviceMediator', function (dataSetBuilder, apiService,
                 return dataSetBuilder.buildDataSet(programStageId);
             }, function (data) {
                 return $q.reject(data);
-            })
+            });
         },
 
         getPrograms: function() {
@@ -26,7 +26,7 @@ serviceMediator.factory('serviceMediator', function (dataSetBuilder, apiService,
                 return apiService.getPrograms();
             }, function (data) {
                 return $q.reject(data);
-            })
+            });
         },
 
         getProgram: function(id) {

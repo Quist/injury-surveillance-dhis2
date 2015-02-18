@@ -3,7 +3,7 @@
 var builders = angular.module('app.builders', ['ngResource']);
 
 builders.factory('dataSetBuilder', function (apiService, $log, $q) {
-    var dataset = [{}];
+    var dataset = [];
     var dataElements = [];
 
     function buildDataset(elementResponses) {
@@ -12,8 +12,8 @@ builders.factory('dataSetBuilder', function (apiService, $log, $q) {
             var sectionTitle;
 
             //TODO selecting group[1] for testing purposes on 5750-server.
-            if(element.dataElementGroups.length == 0) {
-                sectionTitle = "Not grouped";
+            if(element.dataElementGroups.length === 0) {
+                sectionTitle = "Not Grouped";
             } else {
                 sectionTitle = element.dataElementGroups[0].name;
             }
@@ -22,6 +22,7 @@ builders.factory('dataSetBuilder', function (apiService, $log, $q) {
 
             if('optionSet' in element) {
                 apiService.getOptionSet(element.optionSet.id).then(function(result) {
+                    console.log(result.data.options);
                     newElement.values = result.data.options;
                 });
             }
@@ -37,7 +38,7 @@ builders.factory('dataSetBuilder', function (apiService, $log, $q) {
 
             dataElements.push(element);
         });
-        return {dataSet: dataset, dataElememnts: dataElements};
+        return {dataSet: dataset, dataElements: dataElements};
     }
 
     function findSection(sectionTitle) {
@@ -52,7 +53,7 @@ builders.factory('dataSetBuilder', function (apiService, $log, $q) {
     return {
 
         buildDataSet: function (programStageId) {
-            dataset = [{}];
+            dataset = [];
             dataElements = [];
 
             var returnDeffered = $q.defer();
