@@ -22,7 +22,6 @@ builders.factory('dataSetBuilder', function (apiService, $log, $q, usSpinnerServ
 
             if('optionSet' in element) {
                 apiService.getOptionSet(element.optionSet.id).then(function(result) {
-                    console.log(result.data.options);
                     newElement.values = result.data.options;
                 });
             }

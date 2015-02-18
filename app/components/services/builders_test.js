@@ -87,7 +87,7 @@ describe("Builders", function () {
                         }
                     }
                 ]
-        }
+        };
     }
 
     function element1() {
@@ -95,7 +95,7 @@ describe("Builders", function () {
             shortName: "Element1",
             dataElementGroups: [{name: "firstGroup"}],
             type: "string"
-        }
+        };
     }
 
     function element2() {
@@ -106,7 +106,7 @@ describe("Builders", function () {
             optionSet: {
                 id: "1"
             }
-        }
+        };
     }
 
     function element3() {
@@ -114,7 +114,7 @@ describe("Builders", function () {
             shortName: "Element3",
             dataElementGroups: [{name: "yourGroup"}],
             type: "string"
-        }
+        };
     }
 
     function element4 () {
@@ -122,7 +122,7 @@ describe("Builders", function () {
             shortName: "Element4",
             dataElementGroups: [{name: "yourGroup"}],
             type: "string"
-        }
+        };
     }
 
     function expectedResult() {
@@ -189,6 +189,6 @@ describe("Builders", function () {
                     type: "string"
                 }
             ]
-        }
+        };
     }
 });

@@ -2,7 +2,7 @@
 
 var serviceMediator = angular.module('app.serviceMediator', ['ngResource']);
 
-serviceMediator.factory('serviceMediator', function (dataSetBuilder, apiService, $rootScope, $q, $timeout) {
+serviceMediator.factory('serviceMediator', function (dataSetBuilder, apiService, $rootScope, $q) {
 
     function checkForApi() {
         if('dhisApi' in $rootScope) {

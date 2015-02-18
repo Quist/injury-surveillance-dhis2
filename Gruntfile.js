@@ -43,4 +43,5 @@ module.exports = function(grunt) {
 
     grunt.registerTask('test', ['karma']);
     grunt.registerTask('lint', ['jshint']);
+    grunt.registerTask('deploy', ['jshint', 'karma']);
 };
