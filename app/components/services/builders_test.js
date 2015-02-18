@@ -30,6 +30,11 @@ describe("Builders", function () {
             $rootScope.dhisApi = api;
         }));
 
+        afterEach(function() {
+            $httpBackend.verifyNoOutstandingExpectation();
+            $httpBackend.verifyNoOutstandingRequest();
+        });
+
         it("Should be defined", function () {
             expect(dataSetBuilder).toBeDefined();
         });
@@ -42,12 +47,12 @@ describe("Builders", function () {
             $httpBackend.expectGET(api + 'dataElements/4.json').respond(element4());
             $httpBackend.expectGET(api + 'optionSets/1.json').respond({options: ["Test1", "Test2"]});
 
-            var handler = jasmine.createSpy('success');
-            dataSetBuilder.buildDataSet(1).then(handler);
+            var spy = jasmine.createSpy('success');
+            dataSetBuilder.buildDataSet(1).then(spy);
 
             $httpBackend.flush();
             $rootScope.$digest();
-            expect(handler).toHaveBeenCalledWith(expectedResult());
+            expect(spy).toHaveBeenCalledWith(expectedResult());
         });
     });
 
