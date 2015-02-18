@@ -2,14 +2,16 @@
   <div class="container">
 
     <ul ng-repeat="group in groups" class="nav navbar-nav">
-      <li><a href="#">{{group.sectionTitle}}</a></li>
+      <li><a ng-click="onNavItemClick(group)">{{group.sectionTitle}}</a></li>
     </ul>
   </div>
 </nav>
 
 <div ng-repeat="group in groups" class="group-container">
-  <form>
-    <h2>{{group.sectionTitle}}</h2>
+  <div id="{{group.$$hashKey}}">
+
+  <form >
+    <h2 >{{group.sectionTitle}}</h2>
     <div ng-repeat="dataelement in group.dataElements" class="form-group">
       <label>
         {{dataelement.shortName}}
@@ -48,6 +50,8 @@
 
     </div>
   </form>
+  </div>
+
 </div>
 
 <button style="margin-top: 20px;" class="btn btn-lg btn-success">Submit</button>

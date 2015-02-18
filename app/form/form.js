@@ -10,52 +10,21 @@ angular.module('app.form', ['ngRoute'])
                 dataSet: function (serviceMediator, $route) {
                     return serviceMediator.getDataSet($route.current.params.stageId);
                 }
-            }
+            },
+            reloadOnSearch : false
         });
     }])
-    .controller('FormCtrl', ['$routeParams', '$scope','$interval', 'dataSet',
-        function($routeParams, $scope, $interval, dataSet) {
+
+    .run(['$anchorScroll', function($anchorScroll) {
+        $anchorScroll.yOffset = 50;   // always scroll by 50 extra pixels
+    }])
+
+    .controller('FormCtrl', ['$scope','$location', '$anchorScroll', 'dataSet',
+        function($scope, $location,$anchorScroll, dataSet) {
             $scope.groups = dataSet.dataSet;
 
-            var fakeData = [
-                {
-                    sectionTitle: "Basic info",
-                    dataElements : [
-                        {
-                            shortName : "Age",
-                            valueType : "Number"
-                        },
-                        {
-                            shortName : "Occupation",
-                            valueType : "Multi-Text"
-                        },
-                        {
-                            shortName : "Sex",
-                            valueType : "Radio",
-                            values : [
-                                "Male", "Female", "Other"
-                            ]
-                        }, {
-                            shortName : "Date of injury",
-                            valueType : "Date"
-                        },
-                        {
-                            shortName: "Time of admission",
-                            valueType: "Date"
-                        }
-                    ]
-                },
-                {
-                    sectionTitle: "Transportation",
-                    dataElements : [
-                        {
-                            shortName : "From the site of injury",
-                            valueType : "Text"
-                        }
-                    ]
-                },
-                {
-                    sectionTitle : "Diagnosis"
-                }
-            ];
+            $scope.onNavItemClick = function(item){
+                $location.hash(item.$$hashKey);
+                $anchorScroll();
+            };
         }]);
