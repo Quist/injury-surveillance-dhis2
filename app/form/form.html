@@ -1,55 +1,70 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
-
-    <ul ng-repeat="group in groups" class="nav navbar-nav">
-      <li><a ng-click="onNavItemClick(group)">{{group.sectionTitle}}</a></li>
-    </ul>
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Injury Surveillance</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse" style="height: 1px;" aria-expanded="false">
+      <ul ng-repeat="group in groups" class="nav navbar-nav">
+        <li><a
+                ng-click="onNavItemClick(group)"
+                data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                >
+          {{group.sectionTitle}}
+        </a></li>
+      </ul>
+    </div>
   </div>
 </nav>
 
 <div ng-repeat="group in groups" class="group-container">
   <div id="{{group.$$hashKey}}">
 
-  <form >
-    <h2 >{{group.sectionTitle}}</h2>
-    <div ng-repeat="dataelement in group.dataElements" class="form-group">
-      <label>
-        {{dataelement.shortName}}
-      </label>
-
-      <!-- Text type -->
-      <input ng-if="dataelement.valueType == 'string'" type ="text" class="form-control">
-
-      <!-- Number type -->
-      <input ng-if="dataelement.valueType == 'int'" type ="number" class="form-control">
-
-      <!-- Radio type -->
-      <div ng-if="dataelement.valueType == 'bool'" class="radio" ng-repeat="option in dataelement.values">
-        <label> 
-          <input type="radio" name="optionsRadios" checked>
-          {{option}}
+    <form >
+      <h2 >{{group.sectionTitle}}</h2>
+      <div ng-repeat="dataelement in group.dataElements" class="form-group">
+        <label>
+          {{dataelement.shortName}}
         </label>
-      </div>
 
-      <!-- Checkbox type -->
-      <div ng-if="datelement.valueType == 'Checkbox'">
+        <!-- Text type -->
+        <input ng-if="dataelement.valueType == 'string'" type ="text" class="form-control">
 
-      </div>
+        <!-- Number type -->
+        <input ng-if="dataelement.valueType == 'int'" type ="number" class="form-control">
 
-
-      <!-- Date type -->
-      <div ng-if="dataelement.valueType == 'date'">
-        <input  type ="datetime-local" class="form-control">
-        <div class="checkbox">
+        <!-- Radio type -->
+        <div ng-if="dataelement.valueType == 'bool'" class="radio" ng-repeat="option in dataelement.values">
           <label>
-            <input type="checkbox"> Unknown
+            <input type="radio" name="optionsRadios" checked>
+            {{option}}
           </label>
         </div>
+
+        <!-- Checkbox type -->
+        <div ng-if="datelement.valueType == 'Checkbox'">
+
+        </div>
+
+
+        <!-- Date type -->
+        <div ng-if="dataelement.valueType == 'date'">
+          <input  type ="datetime-local" class="form-control">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> Unknown
+            </label>
+          </div>
+        </div>
+
+
       </div>
-
-
-    </div>
-  </form>
+    </form>
   </div>
 
 </div>
