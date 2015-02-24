@@ -98,6 +98,7 @@ describe("Builders", function () {
     function element1() {
         return {
             shortName: "Element1",
+            id: "1",
             dataElementGroups: [{name: "firstGroup"}],
             type: "string"
         };
@@ -106,6 +107,7 @@ describe("Builders", function () {
     function element2() {
         return {
             shortName: "Element2",
+            id: "2",
             dataElementGroups: [{name: "myGroup"}],
             type: "string",
             optionSet: {
@@ -117,6 +119,7 @@ describe("Builders", function () {
     function element3() {
         return {
             shortName: "Element3",
+            id: "3",
             dataElementGroups: [{name: "yourGroup"}],
             type: "string"
         };
@@ -125,6 +128,7 @@ describe("Builders", function () {
     function element4 () {
         return {
             shortName: "Element4",
+            id: "4",
             dataElementGroups: [{name: "yourGroup"}],
             type: "string"
         };
@@ -138,6 +142,7 @@ describe("Builders", function () {
                     dataElements: [
                         {
                             shortName: "Element1",
+                            id: "1",
                             valueType: "string",
                             values: []
                         }
@@ -148,6 +153,7 @@ describe("Builders", function () {
                     dataElements: [
                         {
                             shortName: "Element2",
+                            id: "2",
                             valueType: "string",
                             values: ["Test1", "Test2"]
                         }
@@ -158,11 +164,13 @@ describe("Builders", function () {
                     dataElements: [
                         {
                             shortName: "Element3",
+                            id: "3",
                             valueType: "string",
                             values: []
                         },
                         {
                             shortName: "Element4",
+                            id: "4",
                             valueType: "string",
                             values: []
                         }
@@ -172,11 +180,13 @@ describe("Builders", function () {
             dataElements: [
                 {
                     shortName: "Element1",
+                    id: "1",
                     dataElementGroups: [{name: "firstGroup"}],
                     type: "string"
                 },
                 {
                     shortName: "Element2",
+                    id: "2",
                     dataElementGroups: [{name: "myGroup"}],
                     type: "string",
                      optionSet: {
@@ -185,11 +195,13 @@ describe("Builders", function () {
                 },
                 {
                     shortName: "Element3",
+                    id: "3",
                     dataElementGroups: [{name: "yourGroup"}],
                     type: "string"
                 },
                 {
                     shortName: "Element4",
+                    id: "4",
                     dataElementGroups: [{name: "yourGroup"}],
                     type: "string"
                 }

@@ -18,7 +18,7 @@ builders.factory('dataSetBuilder', function (apiService, $log, $q, usSpinnerServ
                 sectionTitle = element.dataElementGroups[0].name;
             }
 
-            var newElement = {shortName: element.shortName, valueType: element.type, values: []};
+            var newElement = {shortName: element.shortName, id: element.id, valueType: element.type, values: []};
 
             if('optionSet' in element) {
                 apiService.getOptionSet(element.optionSet.id).then(function(result) {
