@@ -32,14 +32,11 @@
           {{dataelement.shortName}}
         </label>
 
-        <!-- Text type -->
-        <input ng-if="dataelement.valueType == 'string'" type ="text" class="form-control">
-
         <!-- Number type -->
         <input ng-if="dataelement.valueType == 'int'" type ="number" class="form-control">
 
         <!-- Radio type -->
-        <div ng-if="dataelement.valueType == 'bool'" class="radio" ng-repeat="option in dataelement.values">
+        <div ng-if="dataelement.valueType == 'string'" class="radio" ng-repeat="option in dataelement.values">
           <label>
             <input type="radio" name="optionsRadios" checked>
             {{option}}
