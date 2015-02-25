@@ -17,6 +17,11 @@
   border-style: solid;
 }
 
+/* Force max size of a collapsed navbar */
+.navbar-fixed-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse{
+  max-height: 540px;
+}
+
 @media (max-width: 2000px) {
   .navbar-header {
     float: none;
