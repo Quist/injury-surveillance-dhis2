@@ -36,12 +36,17 @@
         <input ng-if="dataelement.valueType == 'int'" type ="number" class="form-control">
 
         <!-- Radio type -->
-        <div ng-if="dataelement.valueType == 'string'" class="radio" ng-repeat="option in dataelement.values">
+        <div ng-if="dataelement.valueType == 'string' && dataelement.values.length < 5" class="radio" ng-repeat="option in dataelement.values">
           <label>
             <input type="radio" name="optionsRadios" checked>
             {{option}}
           </label>
         </div>
+
+        <!-- Radio type -->
+        <select ng-if="dataelement.valueType == 'string' && dataelement.values.length >= 5" class="form-control" >
+          <option ng-repeat="option in dataelement.values">{{option}}</option>
+        </select>
 
         <!-- Checkbox type -->
         <div ng-if="datelement.valueType == 'Checkbox'">
