@@ -12,30 +12,27 @@ builders.factory('dataSetBuilder', function (apiService, $log, $q, usSpinnerServ
             var sectionTitle;
 
             //TODO selecting group[1] for testing purposes on 5750-server.
-            if(element.dataElementGroups.length === 0) {
-                sectionTitle = "Not Grouped";
-            } else {
+            if(element.dataElementGroups.length > 0) {
                 sectionTitle = element.dataElementGroups[0].name;
+
+                var newElement = {shortName: element.shortName, id: element.id, valueType: element.type, values: []};
+
+                if ('optionSet' in element) {
+                    apiService.getOptionSet(element.optionSet.id).then(function (result) {
+                        newElement.values = result.data.options;
+                    });
+                }
+
+                var section = findSection(sectionTitle);
+                if (section.exist) {
+                    $log.debug("Adding to existing section: " + sectionTitle);
+                    section.data.dataElements.push(newElement);
+                } else {
+                    $log.debug("Creating new section: " + sectionTitle);
+                    dataset.push({sectionTitle: sectionTitle, dataElements: [newElement]});
+                }
+                dataElements.push(element);
             }
-
-            var newElement = {shortName: element.shortName, id: element.id, valueType: element.type, values: []};
-
-            if('optionSet' in element) {
-                apiService.getOptionSet(element.optionSet.id).then(function(result) {
-                    newElement.values = result.data.options;
-                });
-            }
-
-            var section = findSection(sectionTitle);
-            if(section.exist) {
-                $log.debug("Adding to existing section: " + sectionTitle);
-                section.data.dataElements.push(newElement);
-            } else {
-                $log.debug("Creating new section: " + sectionTitle);
-                dataset.push({sectionTitle: sectionTitle,dataElements: [newElement]});
-            }
-
-            dataElements.push(element);
         });
         return {dataSet: dataset, dataElements: dataElements};
     }
